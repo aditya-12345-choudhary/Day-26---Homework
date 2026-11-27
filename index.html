@@ -1,0 +1,524 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Superhero World</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #eef2ff;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background: #101d42;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(120deg, #101d42, #2563eb);
+            color: white;
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .hero-banner h1 {
+            font-size: 45px;
+            font-weight: bold;
+        }
+
+        .hero-card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.3s;
+            height: 100%;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .btn-hero {
+            background: #2563eb;
+            color: white;
+            border-radius: 25px;
+            padding: 10px 22px;
+        }
+
+        .btn-hero:hover {
+            background: #172554;
+            color: white;
+        }
+
+        /* SUPERHERO DETAILS PAGE */
+
+        .profile {
+            display: none;
+            max-width: 1250px;
+            margin: 20px auto;
+        }
+
+        .profile-card {
+            border: none;
+            border-radius: 18px;
+            padding: 20px !important;
+        }
+
+        .profile-card > .row {
+            align-items: stretch;
+        }
+
+        .image-column {
+            display: flex;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            min-height: 650px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .detail-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-content h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .detail-content h5 {
+            margin-bottom: 8px;
+        }
+
+        #detailDescription {
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .info-box {
+            background: #f3f6ff;
+            padding: 13px;
+            border-radius: 12px;
+            height: 100%;
+        }
+
+        .info-box h5 {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .info-box p {
+            margin-bottom: 0;
+            line-height: 1.45;
+        }
+
+        footer {
+            background: #101d42;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 767px) {
+
+            .profile-img {
+                height: 400px;
+                min-height: 400px;
+            }
+
+            .hero-banner h1 {
+                font-size: 32px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 400px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+
+<nav class="navbar navbar-expand-lg p-3">
+    <div class="container">
+
+        <a class="navbar-brand" href="#" onclick="goHome()">
+            🦸 SUPERHERO WORLD
+        </a>
+
+        <button class="btn btn-outline-light"
+                onclick="goHome()">
+            Home
+        </button>
+
+    </div>
+</nav>
+
+
+<!-- HOME PAGE -->
+
+<div id="homePage">
+
+    <section class="hero-banner">
+
+        <h1>ENTER THE WORLD OF SUPERHEROES!</h1>
+
+        <p class="mt-3">
+            Discover amazing heroes, their powers,
+            abilities and incredible adventures.
+        </p>
+
+        <h5 class="mt-4">
+            Which superhero would you like to know about?
+        </h5>
+
+    </section>
+
+    <div class="container py-5">
+
+        <h2 class="text-center mb-4">
+            Choose Your Favourite Superhero
+        </h2>
+
+        <div class="row g-4" id="heroContainer"></div>
+
+    </div>
+
+</div>
+
+
+<!-- SUPERHERO DETAILS PAGE -->
+
+<div class="container profile" id="profilePage">
+
+    <button class="btn btn-dark mb-3"
+            onclick="goHome()">
+        ← Back to Superheroes
+    </button>
+
+    <div class="card shadow-lg profile-card">
+
+        <div class="row g-3">
+
+            <!-- SUPERHERO IMAGE -->
+
+            <div class="col-md-6 image-column">
+
+                <img id="detailImage"
+                     class="profile-img"
+                     src=""
+                     alt="Superhero">
+
+            </div>
+
+
+            <!-- CHARACTER INFORMATION -->
+
+            <div class="col-md-6 detail-content">
+
+                <h1 class="text-primary" id="detailName"></h1>
+
+                <h5 class="text-secondary" id="detailTitle"></h5>
+
+                <hr class="my-2">
+
+                <p id="detailDescription"></p>
+
+
+                <!-- INFORMATION GRID -->
+
+                <div class="info-grid">
+
+                    <div class="info-box">
+                        <h5>⚡ Superpowers</h5>
+                        <p id="detailPowers"></p>
+                    </div>
+
+                    <div class="info-box">
+                        <h5>🛡️ Special Abilities</h5>
+                        <p id="detailAbilities"></p>
+                    </div>
+
+                    <div class="info-box">
+                        <h5>🌆 Home City</h5>
+                        <p id="detailCity"></p>
+                    </div>
+
+                    <div class="info-box">
+                        <h5>😊 Personality</h5>
+                        <p id="detailPersonality"></p>
+                    </div>
+
+                    <div class="info-box">
+                        <h5>⚔️ Famous Enemies</h5>
+                        <p id="detailEnemies"></p>
+                    </div>
+
+                    <div class="info-box">
+                        <h5>⭐ Interesting Facts</h5>
+                        <p id="detailFacts"></p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h5>🦸 Superhero World</h5>
+
+    <p>Explore. Discover. Get Inspired.</p>
+
+    <small>
+        Created using HTML, CSS, Bootstrap and JavaScript
+    </small>
+
+</footer>
+
+
+<script>
+
+// SUPERHERO CLASS
+
+class Superhero {
+
+    constructor(name, title, image, description,
+                powers, abilities, city,
+                personality, enemies, facts) {
+
+        this.name = name;
+        this.title = title;
+        this.image = image;
+        this.description = description;
+        this.powers = powers;
+        this.abilities = abilities;
+        this.city = city;
+        this.personality = personality;
+        this.enemies = enemies;
+        this.facts = facts;
+
+    }
+
+    displayCard() {
+
+        return `
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card hero-card shadow">
+
+                <img src="${this.image}"
+                     class="hero-img"
+                     alt="${this.name}">
+
+                <div class="card-body text-center">
+
+                    <h3>${this.name}</h3>
+
+                    <p class="text-muted">
+                        ${this.title}
+                    </p>
+
+                    <button class="btn btn-hero"
+                        onclick="showProfile('${this.name}')">
+
+                        Learn More →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+    }
+
+}
+
+
+// CREATING SUPERHERO OBJECTS
+
+let superheroes = [
+
+    new Superhero(
+        "Spider-Man",
+        "The Friendly Neighbourhood Hero",
+        "spiderman.jpg",
+        "Peter Parker is a young superhero who protects New York City. He received his spider-like abilities after being bitten by a radioactive spider.",
+        "Super strength, wall crawling, spider-sense and web shooting.",
+        "Agility, quick reflexes, web swinging and scientific knowledge.",
+        "New York City",
+        "Funny, intelligent, brave and helpful.",
+        "Green Goblin, Doctor Octopus and Venom.",
+        "Peter Parker is a talented photographer and scientist. His famous lesson is that great power comes with great responsibility."
+    ),
+
+    new Superhero(
+        "Batman",
+        "The Dark Knight",
+        "batman.jpg",
+        "Bruce Wayne is a billionaire who protects Gotham City. He uses his intelligence, training and technology to fight crime.",
+        "He has no natural superpowers.",
+        "Detective skills, martial arts, advanced gadgets and strategic thinking.",
+        "Gotham City",
+        "Serious, intelligent, determined and courageous.",
+        "Joker, Penguin and Riddler.",
+        "Batman uses the Batmobile, Batarangs and a special high-tech suit. His secret identity is Bruce Wayne."
+    ),
+
+    new Superhero(
+        "Superman",
+        "The Man of Steel",
+        "superman.jpg",
+        "Clark Kent is a superhero from the planet Krypton who protects Earth and fights for justice.",
+        "Super strength, flight, heat vision, super speed and X-ray vision.",
+        "Super hearing, enhanced vision and incredible durability.",
+        "Metropolis",
+        "Kind, honest, hopeful and courageous.",
+        "Lex Luthor, General Zod and Doomsday.",
+        "Superman was raised by the Kent family on Earth. His weakness is Kryptonite."
+    ),
+
+    new Superhero(
+        "Iron Man",
+        "The Armoured Avenger",
+        "ironman.jpg",
+        "Tony Stark is a brilliant inventor who creates advanced armour to protect the world.",
+        "His suit provides flight, strength and energy blasts.",
+        "Engineering, artificial intelligence, scientific inventions and advanced technology.",
+        "New York City",
+        "Clever, confident, humorous and determined.",
+        "Whiplash, Mandarin and Iron Monger.",
+        "Tony Stark created his first Iron Man suit while being held captive. His famous AI assistants include JARVIS and FRIDAY."
+    ),
+
+    new Superhero(
+        "Wonder Woman",
+        "The Amazon Warrior",
+        "wonderwoman.jpg",
+        "Diana Prince is an Amazon warrior who fights for peace, truth and justice.",
+        "Super strength, speed, agility and enhanced durability.",
+        "Expert sword fighting, combat training, Lasso of Truth and shield defence.",
+        "Themyscira and the human world.",
+        "Brave, compassionate, wise and confident.",
+        "Ares, Cheetah and Doctor Poison.",
+        "Wonder Woman carries the Lasso of Truth and is a founding member of the Justice League."
+    )
+
+];
+
+
+// DISPLAY SUPERHERO CARDS
+
+let output = "";
+
+for (let hero of superheroes) {
+    output += hero.displayCard();
+}
+
+document.getElementById("heroContainer").innerHTML = output;
+
+
+// OPEN SELECTED SUPERHERO PROFILE
+
+function showProfile(name) {
+
+    let selectedHero = superheroes.find(
+        hero => hero.name === name
+    );
+
+    if (!selectedHero) return;
+
+    document.getElementById("homePage").style.display = "none";
+
+    document.getElementById("profilePage").style.display = "block";
+
+    document.getElementById("detailName").innerHTML = selectedHero.name;
+
+    document.getElementById("detailTitle").innerHTML = selectedHero.title;
+
+    document.getElementById("detailImage").src = selectedHero.image;
+
+    document.getElementById("detailDescription").innerHTML = selectedHero.description;
+
+    document.getElementById("detailPowers").innerHTML = selectedHero.powers;
+
+    document.getElementById("detailAbilities").innerHTML = selectedHero.abilities;
+
+    document.getElementById("detailCity").innerHTML = selectedHero.city;
+
+    document.getElementById("detailPersonality").innerHTML = selectedHero.personality;
+
+    document.getElementById("detailEnemies").innerHTML = selectedHero.enemies;
+
+    document.getElementById("detailFacts").innerHTML = selectedHero.facts;
+
+    window.scrollTo(0, 0);
+
+}
+
+
+// RETURN TO HOMEPAGE
+
+function goHome() {
+
+    document.getElementById("homePage").style.display = "block";
+
+    document.getElementById("profilePage").style.display = "none";
+
+    window.scrollTo(0, 0);
+
+}
+
+</script>
+
+</body>
+</html>
